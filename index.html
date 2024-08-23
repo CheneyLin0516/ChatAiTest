@@ -126,6 +126,10 @@
                 console.error("Unity instance is not ready.");
             }
         }
+
+        setInterval(() => {
+        sendMessageToUnity("Hello World");
+      }, 5000);
     </script>
   </body>
 </html>
