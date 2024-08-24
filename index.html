@@ -140,6 +140,15 @@
       // setInterval(() => {
       //   unitySpeak("Hello World");
       // }, 5000);
+
+      function speakFinish() {
+        alert("finish");
+      }
+      window.addEventListener("message", (event) => {
+        if (event.data.action === "unitySpeak" && event.data.message) {
+          unitySpeak(event.data.message);
+        }
+      });
     </script>
   </body>
 </html>
