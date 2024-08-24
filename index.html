@@ -6,6 +6,7 @@
     <title>Unity WebGL Player | AIToolkitTest</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -23,6 +24,12 @@
         <div id="unity-build-title">AIToolkitTest</div>
       </div>
     </div>
+
+    <div>
+      <input type="text" id="userInput" placeholder="yourInput">
+      <button id="submitButton">Submit</button>
+  </div>
+
     <script>
 
       var container = document.querySelector("#unity-container");
@@ -31,7 +38,7 @@
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var warningBanner = document.querySelector("#unity-warning");
-
+      var unityInstance = null; 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
       // If type=='warning', a yellow highlight color is used.
@@ -105,8 +112,8 @@
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
-              }).then((unityInstance) => {
-                unityInstance.SendMessage('ChatAgent','ReceiveDataFromBrowser','Hi,there!')
+              }).then((instance) => {
+                unityInstance = instance;
                 loadingBar.style.display = "none";
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
@@ -117,6 +124,13 @@
             };
 
       document.body.appendChild(script);
+
+      document.getElementById("submitButton").addEventListener("click", function() {
+        var inputText = document.getElementById("userInput").value;
+        if (unityInstance && inputText) {
+          unityInstance.SendMessage('ChatAgent', 'ReceiveDataFromBrowser', inputText);
+        }
+      });
 
     </script>
   </body>
