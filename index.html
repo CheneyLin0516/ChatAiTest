@@ -106,7 +106,7 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
-                
+                unityInstance.SendMessage('ChatAgent','ReceiveDataFromBrowser','Hi,there!')
                 loadingBar.style.display = "none";
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
