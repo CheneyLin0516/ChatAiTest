@@ -129,19 +129,6 @@
 
       document.body.appendChild(script);
 
-      document
-        .getElementById("submitButton")
-        .addEventListener("click", function () {
-          var inputText = document.getElementById("userInput").value;
-          if (unityInstance && inputText) {
-            unityInstance.SendMessage(
-              "ChatAgent",
-              "ReceiveDataFromBrowser",
-              inputText
-            );
-          }
-        });
-
       function unitySpeak(message) {
         unityInstance.SendMessage(
           "ChatAgent",
